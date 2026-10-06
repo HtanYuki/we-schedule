@@ -1,48 +1,32 @@
-/* =========================================
-   手机端专属适配（屏幕宽度小于 600px 时生效）
-   ========================================= */
-@media (max-width: 600px) {
-    body {
-                padding: 10px 15px; /* 手机上左右留 15px */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px 15px; /* 手机上左右留白 15px */
+            }
+            .home-container {
+                padding: 15px;     /* 卡片内部留白，不要太挤 */
+                max-width: 100%;
+            }
+            /* 社交按钮变小、并排 */
+            .social-section {
+                flex-direction: row;   /* 👈 三个按钮横着排 */
+                justify-content: center;
+                gap: 8px;              /* 按钮之间的间距 */
+                margin-top: 10px;
+                padding-top: 10px;
+            }
+            .social-btn {
+                width: auto;           /* 👈 宽度自动，让按钮按文字长度自适应 */
+                padding: 8px 12px;     /* 👈 内边距调小 */
+                font-size: 12px;       /* 👈 字号调小 */
+            }
+            /* 海报图片限制高度 */
+            .poster-wrapper img {
+                max-height: 30vh;
+            }
+            /* 底部版权文字变小 */
+            .footer {
+                font-size: 11px;
+                margin-top: 15px;
+                padding-top: 10px;
+            }
         }
-    .home-container {
-                padding: 15px 15px; /* 卡片内部左右留 15px */
-                max-width: 100%;    /* 手机上不限制宽度 */
-    }
-    
-    /* 0. 顶部主标题和副标题（新增） */
-    h1 {
-        font-size: 22px;       /* 👈 主标题字号调小 */
-    }
-    .subtitle {
-        font-size: 12px;       /* 👈 副标题字号调小（原来可能是 15px） */
-        line-height: 1.4;      /* 👈 行距调小，防止两行之间空隙太大 */
-        margin-top: -5px;      /* 👈 和主标题靠得更近 */
-        margin-bottom: 10px;   /* 👈 和下面的按钮留出适当距离 */
-        padding: 0 10px;       /* 👈 左右留点白，防止文字贴边 */
-    }
-
-    /* 1. 社交按钮变小、变紧凑 */
-    .social-section {
-        gap: 8px;
-        margin-top: 15px;
-        padding-top: 15px;
-    }
-    .social-btn {
-        width: 70%;
-        padding: 12px 0;
-        font-size: 12px;
-    }
-
-    /* 2. 海报图片缩小 */
-    .poster-wrapper img {
-        max-height: 30vh;
-    }
-
-    /* 3. 底部版权文字变小 */
-    .footer {
-        font-size: 11px;
-        margin-top: 15px;
-        padding-top: 10px;
-    }
-}
