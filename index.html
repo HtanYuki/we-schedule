@@ -10,12 +10,13 @@
             font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
             background-color: #f4f7f6;
             margin: 0;
-            padding: 40px 20px;
+            padding: 15px 20px;
             display: flex;
             justify-content: center;
             color: #333;
             min-height: 100vh;
             box-sizing: border-box;
+            /* overflow: hidden; 不要强制隐藏，我们要让它自己装得下 */
         }
         .home-container {
             width: 100%;
@@ -23,11 +24,11 @@
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            padding: 40px;
+            padding: 20px 30px;
             text-align: center;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 15px; /* 原来是 25px，各个区块的间距调小 */
         }
         h1 {
             font-size: 28px;
@@ -58,37 +59,83 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
         }
-        /* 社交链接区域 */
-        .social-links {
+        /* 社交区容器 */
+        .social-section {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 10px;
-            padding-top: 20px;
+            gap: 40px;                 /* 按钮间距从 20 改到 15 */
+            margin-top: 5px;
+            padding-top: 10px;
             border-top: 1px solid #eee;
         }
-        .social-links a {
-            text-decoration: none;
-            color: #e74c3c;
-            font-weight: 600;
-            font-size: 15px;
+
+        /* 每一个下拉菜单包裹层 */
+        .dropdown {
+            position: relative;
+            display: inline-block;
         }
-        .social-links a:hover {
-            text-decoration: underline;
+
+        /* 按钮样式（浅灰色） */
+        .social-btn {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 10px 24px;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background-color: #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* 下拉菜单内容 */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            min-width: 130px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 10;
+            padding: 5px 0;
+        }
+
+        /* 下拉菜单里的单个名字链接 */
+        .dropdown-content a {
+            color: #333;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+            color: #e74c3c;
+        }
+
+        /* ⭐ 核心魔法：鼠标悬停显示 */
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
         /* 视频区域 */
-        .video-wrapper {
+        .poster-wrapper {
             margin-top: 20px;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .video-wrapper iframe {
-            width: 100%;
-            height: 250px;
-            border: none;
-            display: block;
-        }
+        
         /* 底部版权 */
         .footer {
             margin-top: auto;
@@ -98,6 +145,21 @@
         .footer strong {
             color: #e74c3c;
         }
+
+        /* 图片区域 */
+        .video-wrapper {
+            margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .video-wrapper img {
+            width: 100%;          /* 宽度撑满卡片 */
+            height: auto;         /* 高度按原图比例自适应 */
+            display: block;
+        }
+        
     </style>
 </head>
 <body>
@@ -109,15 +171,41 @@
     <!-- 跳转按钮：链接指向 pages 文件夹里的 calendar.html -->
     <a href="pages/calendar.html" class="enter-btn">进入行程日历</a>
 
-    <!-- 社交链接区（把 href="..." 里的 # 换成真实的链接） -->
-    <div class="social-links">
-        <a href="#" target="_blank">Instagram</a>
-        <a href="#" target="_blank">X (Twitter)</a>
-        <a href="#" target="_blank">微博</a>
+        <!-- 社交链接区（下拉菜单版） -->
+    <div class="social-section">
+        
+        <!-- Instagram 按钮 -->
+        <div class="dropdown">
+            <button class="social-btn ig-btn">Instagram</button>
+            <div class="dropdown-content">
+                <a href="https://www.instagram.com/williamjkp?stkn=YmRxOTZrM3BuNmM1" target="_blank">williamjkp</a>
+                <a href="https://www.instagram.com/est_rvp?stkn=MTFjOXFwanV4Y2V6Ng==" target="_blank">est_rvp</a>
+            </div>
+        </div>
+
+        <!-- X (Twitter) 按钮 -->
+        <div class="dropdown">
+            <button class="social-btn x-btn">X (Twitter)</button>
+            <div class="dropdown-content">
+                <a href="https://x.com/williamjkp1?s=21" target="_blank">Williamjkp1</a>
+                <a href="https://x.com/estrvp?s=21" target="_blank">est_rvp</a>
+            </div>
+        </div>
+
+        <!-- 微博按钮 -->
+        <div class="dropdown">
+            <button class="social-btn wb-btn">微博</button>
+            <div class="dropdown-content">
+                <a href="https://weibo.com/u/7977574769" target="_blank">JakrapatrWL</a>
+                <a href="https://weibo.com/u/7978038699" target="_blank">EstSupha</a>
+            </div>
+        </div>
+
     </div>
 
+
     <!-- 图片展示区 -->
-    <div class="video-wrapper">
+    <div class="poster-wrapper">
         <img src="images/poster1.jpg" alt="WilliamEst 宣传海报" style="width: 100%; height: auto; display: block;">
     </div>
 
@@ -125,6 +213,7 @@
     <div class="footer">
         © 2026 WilliamEst行程 | Designed & Maintained by <strong>TrillPineyew</strong>
     </div>
+    
 </div>
 
 </body>

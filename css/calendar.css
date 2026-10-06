@@ -232,3 +232,16 @@ body {
            color: #555;
            line-height: 1.5;
         }
+
+        /* 被选中的日期格子样式 */
+        .day-cell.active {
+            background-color: #e74c3c; /* 选中变成红色 */
+            color: #ffffff;            /* 文字变成白色 */
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4); /* 加一层红色的阴影 */
+            font-weight: bold;         /* 字体加粗 */
+        }
+
+        /* 被选中的日期如果有行程，那个小红点要变成白色 */
+        .day-cell.active.has-event::after {
+            background-color: #ffffff;
+        }
