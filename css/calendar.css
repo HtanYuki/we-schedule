@@ -245,3 +245,49 @@ body {
         .day-cell.active.has-event::after {
             background-color: #ffffff;
         }
+
+    /* =========================================
+   手机端专属适配（屏幕宽度小于 600px 时生效）
+   ========================================= */
+@media (max-width: 600px) {
+
+    /* 1. 首页：社交按钮变成上下排列，防止挤在一起 */
+    .social-section {
+        flex-direction: column;  /* 竖着排 */
+        align-items: center;     /* 居中 */
+        gap: 10px;               /* 上下间距 */
+    }
+    .social-btn {
+        width: 80%;              /* 按钮占屏幕 80% 宽，好看又大气 */
+        padding: 12px 0;         /* 上下内边距加大，点击更舒服 */
+    }
+
+    /* 2. 日历页：调整格子和卡片的边距 */
+    .app-container {
+        padding: 10px;           /* 手机上没有那么多留白 */
+    }
+    .calendar-wrapper {
+        padding: 15px;           /* 卡片内边距减小 */
+    }
+    .calendar-grid {
+        gap: 4px;                /* 格子之间的缝隙变小 */
+    }
+    .day-cell {
+        font-size: 14px;         /* 日期数字变小一点 */
+        border-radius: 6px;      /* 圆角变小一点 */
+    }
+    .weekday {
+        font-size: 12px;         /* 星期文字变小 */
+    }
+
+    /* 3. 行程详情框：让内容更透气 */
+    .event-detail {
+        padding: 15px;           /* 减小内边距 */
+    }
+    .event-item {
+        padding: 10px 15px;      /* 减小卡片内边距 */
+    }
+    .event-item p {
+        font-size: 14px;         /* 文字大小调整 */
+    }
+}
