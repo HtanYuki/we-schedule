@@ -10,13 +10,14 @@
             font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
             background-color: #f4f7f6;
             margin: 0;
-            padding: 15px 20px;
+            padding: 20px;           /* 上下左右各留 20px 白边 */
             display: flex;
-            justify-content: center;
+            justify-content: center; /* 卡片水平居中 */
+            align-items: center;     /* 卡片垂直居中 */
             color: #333;
             min-height: 100vh;
             box-sizing: border-box;
-            /* overflow: hidden; 不要强制隐藏，我们要让它自己装得下 */
+            /* overflow: hidden; 👈 先删掉这行，看下是否还有滚动条 */
         }
         .home-container {
             width: 100%;
@@ -24,14 +25,14 @@
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            padding: 20px 30px;
+            padding: 25px 25px;
             text-align: center;
             display: flex;
             flex-direction: column;
-            gap: 15px; /* 原来是 25px，各个区块的间距调小 */
-             /* 👇 新增这两行，给卡片左右各留出 15px 安全距离 */
-            margin-left: 15px;
-            margin-right: 15px;
+            gap: 15px;
+            /* 👇 关键：让它水平居中，且不限制最大宽度 */
+            margin: 0 auto;
+            box-sizing: border-box;
         }
         h1 {
             font-size: 28px;
