@@ -1,0 +1,234 @@
+
+/* 总览页的月份卡片样式 */
+.month-card {
+    display: block;
+    padding: 30px 10px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.month-card:hover {
+    background: #dbe4ff; /* 浅克莱茵蓝 */
+    border-color: #b0c4de;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}        
+
+/* 全局样式，让页面居中、好看 */
+body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            color: #333;
+        }
+        .app-container {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        /* --- 日历部分 --- */
+        .calendar-wrapper {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        .calendar-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .calendar-month {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 900;
+            color: #e74c3c;
+            margin-bottom: 25px;
+            font-family: 'Microsoft YaHei', 'SimHei', sans-serif; /* 字体族 */
+        }
+        
+        /* 日历网格布局 */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            alingn-item:center;/*让所有格子垂直居中对齐*/
+        }
+        
+        /* 星期标题 */
+        .weekday {
+            text-align: center;
+            font-size: 13px;
+            color: #95a5a6;
+            font-weight: bold;
+            padding-bottom: 10px;
+        }
+
+        /* 日期格子 */
+        .day-cell {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: #f8f9fa;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            user-select: none;
+            padding-bottom: 8px;
+            min-width: 36px;
+        }
+        .day-cell:hover {
+            background: #d1daf4;
+        }
+        /* 有行程的日子加个小圆点 */
+        .day-cell.has-event::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #e74c3c;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 8px;
+        }
+
+        /* 核心魔法：用 checkbox 控制弹出效果 */
+        input[type="checkbox"] {
+            display: none; /* 隐藏原本丑陋的勾选框 */
+        }
+        /* 当 checkbox 被选中时，对应的日期格子变红 */
+        input[type="checkbox"]:checked + label {
+            background: #e74c3c;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+            font-weight: bold;
+        }
+        /* 选中的日子，圆点变成白色 */
+        input[type="checkbox"]:checked + label.has-event::after {
+            background: #ffffff;
+        }
+
+        /* --- 详情弹出区域 --- */
+        .event-detail-box {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            /* 默认隐藏，高度为0 */
+            max-height: 0;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            margin-top: 0;
+        }
+        /* 当对应的 checkbox 被选中时，展开详情区域 */
+        input[type="checkbox"]:checked ~ .event-detail-box {
+            max-height: 300px; /* 展开的高度 */
+            opacity: 1;
+            margin-top: 10px;
+            border-left: 6px solid #e74c3c;
+        }
+        .event-content {
+            padding: 25px;
+        }
+        .event-date-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 10px;
+        }
+        .event-row {
+            display: flex;
+            margin-bottom: 12px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .event-label {
+            width: 70px;
+            color: #95a5a6;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .event-value {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        .event-area {
+            min-height: 120px;
+            margin-top: 20px;
+        }
+        .event-detail {
+            display: none; /* 默认隐藏，点日期时才显示 */
+            background: #fff5f5;
+            border-left: 6px solid #e74c3c;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .event-detail h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 10px;
+        }
+        .event-detail p {
+            margin: 8px 0;
+            color: #555;
+            font-size: 15px;
+        }
+
+        
+        /* 底部版权 */
+        .footer {
+            text-align: center;
+            margin-top: auto;
+            padding-top:40px;
+            font-size: 13px;
+            color: #bdc3c7;
+        }
+        .footer strong {
+            color: #e74c3c;
+        }
+
+        /* 每个独立行程的卡片样式 */
+        .event-item {
+            background: #ffffff;              /* 白色背景，和外层粉底区分 */
+            border: 1px solid #f0e6e6;        /* 浅灰色边框 */
+            border-left: 4px solid #e74c3c;   /* 左侧红色粗条，代表行程 */
+            border-radius: 8px;               /* 圆角 */
+            padding: 15px 20px;               /* 内部留白 */
+            margin-bottom: 15px;              /* 每个框之间隔开 15px */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03); /* 轻微阴影 */
+        }
+
+        /* 框内文字样式 */
+        .event-item p {
+           margin: 6px 0;
+           font-size: 15px;
+           color: #555;
+           line-height: 1.5;
+        }

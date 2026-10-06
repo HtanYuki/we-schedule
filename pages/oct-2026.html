@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WilliamEst 行程日历 - 2026年10月</title>
+    <link rel="stylesheet" href="../css/calendar.css">
+</head>
+<body>
+
+<div class="app-container">
+    
+    <!-- 1. 顶部的返回导航 -->
+    <div style="text-align: left; margin-bottom: 20px;">
+        <!-- 点击这里返回总览页(calendar.html) -->
+        <a href="calendar.html" style="text-decoration: none; color: #7f8c8d; font-weight: 600; font-size: 15px;">← 返回</a>
+    </div>
+
+    <!-- 2. 日历卡片区域 -->
+    <div class="calendar-wrapper">
+        <div class="calendar-title">WilliamEst 行程日历</div>
+        <div class="calendar-month">2026年10月</div>
+        
+        <div class="calendar-grid">
+            <!-- 星期表头 -->
+            <div class="weekday">日</div>
+            <div class="weekday">一</div>
+            <div class="weekday">二</div>
+            <div class="weekday">三</div>
+            <div class="weekday">四</div>
+            <div class="weekday">五</div>
+            <div class="weekday">六</div>
+
+            <!-- 1-14日  -->
+            <div class="day-cell">1</div>
+
+            <div style="position: relative;">
+                <input type="checkbox" id="event-2">
+                <label for="event-2" class="day-cell has-event">2</label>
+            </div>
+
+            <div class="day-cell">3</div>
+            <div class="day-cell">4</div>
+            <div class="day-cell">5</div>
+            <div class="day-cell">6</div>
+            <div class="day-cell">7</div>
+
+             <!-- 👇 8日：有行程，点击这个格子 -->
+            <div style="position: relative;">
+                <input type="checkbox" id="event-8">
+                <label for="event-8" class="day-cell has-event">8</label>
+            </div>
+
+            <div class="day-cell">9</div>
+            <div class="day-cell">10</div>
+            <div class="day-cell">11</div>
+            <div class="day-cell">12</div>
+            <div class="day-cell">13</div>
+            <div class="day-cell">14</div>
+
+            <!-- 15-19日 -->
+            <div class="day-cell">15</div>
+            <div class="day-cell">16</div>
+            <div class="day-cell">17</div>
+            <div class="day-cell">18</div>
+            <div class="day-cell">19</div>
+
+            <!-- 👇 20日：有行程，点击这个格子 -->
+            <div style="position: relative;">
+                <input type="checkbox" id="event-20">
+                <label for="event-20" class="day-cell has-event">20</label>
+            </div>
+
+            <!-- 21-31日 -->
+            <div class="day-cell">21</div>
+            <div class="day-cell">22</div>
+            <div class="day-cell">23</div>
+            <div class="day-cell">24</div>
+            <div class="day-cell">25</div>
+            <div class="day-cell">26</div>
+            <div class="day-cell">27</div>
+            <div class="day-cell">28</div>
+            <div class="day-cell">29</div>
+            <div class="day-cell">30</div>
+            <div class="day-cell">31</div>
+
+        </div>
+    </div>
+
+    <!-- 3. 行程详情展示区（就在日历下方） -->
+    <div class="event-area">
+        <div class="event-detail" id="detail-2">
+            <h3>2026年10月2日</h3>
+            <div class="event-item">
+               <p><strong>活动：WilliamEst Concert PressTour</strong></p>
+               <p>12:30 ELLE Men</p>
+               <p>14:45 วันบันเทิง Live</p>
+               <p>15:45 Nine Entertain</p>
+               <p>16:45 Praew Magazine Live</p>
+               <p>19:00 GMMTV Live</p>
+            </div>
+            <div class="event-item">
+                <p><strong>GMMTV HAPPY Family</strong></p>
+            </div>
+        </div>
+
+        <!-- 15号的行程详情 -->
+        <div class="event-detail" id="detail-8">
+            <h3>2026年10月8日</h3>
+            <p><strong>活动：</strong> GMMTV LIVEHOUSE</p>
+            <p><strong>时间：</strong> 9:00 PM</p>
+            <p><strong>地点：</strong> Union Hall</p>
+            <p><strong>williamest Wesley</strong></p>
+        </div>
+
+        <!-- 20号的行程详情 -->
+        <div class="event-detail" id="detail-20">
+            <h3>2026年10月20日</h3>
+            <p><strong>标题：</strong> 线上直播粉丝见面会</p>
+            <p><strong>时间：</strong> 9:00 PM</p>
+            <p><strong>地点：</strong> 线上 · 某直播平台</p>
+        </div>
+    </div>
+
+    <!-- 4. 底部版权归属 -->
+    <div class="footer">
+        © 2026 WilliamEst 行程站 | Designed & Maintained by <strong>TrillPineyew</strong>
+    </div>
+
+</div>
+
+<!-- 5. 交互脚本 -->
+<script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+    checkboxes.forEach(box => {
+        box.addEventListener('change', function() {
+            // 先隐藏所有详情
+            document.querySelectorAll('.event-detail').forEach(detail => {
+                detail.style.display = 'none';
+            });
+            // 如果当前被选中，显示对应的详情
+            if (this.checked) {
+                const detailId = 'detail-' + this.id.split('-')[1];
+                const targetDetail = document.getElementById(detailId);
+                if (targetDetail) {
+                    targetDetail.style.display = 'block';
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
