@@ -1,22 +1,40 @@
 /* =========================================
-   首页手机端专属适配（屏幕宽度小于 600px 时生效）
+   手机端专属适配（屏幕宽度小于 600px 时生效）
    ========================================= */
 @media (max-width: 600px) {
-    /* 社交按钮变竖排 */
-    .social-section {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-    }
-    .social-btn {
-        width: 80%;
-        padding: 12px 0;
-    }
-    /* 标题字号稍微变小 */
+
+    /* 0. 顶部主标题和副标题（新增） */
     h1 {
-        font-size: 22px;
+        font-size: 22px;       /* 👈 主标题字号调小 */
     }
     .subtitle {
-        font-size: 13px;
+        font-size: 12px;       /* 👈 副标题字号调小（原来可能是 15px） */
+        line-height: 1.4;      /* 👈 行距调小，防止两行之间空隙太大 */
+        margin-top: -5px;      /* 👈 和主标题靠得更近 */
+        margin-bottom: 10px;   /* 👈 和下面的按钮留出适当距离 */
+        padding: 0 10px;       /* 👈 左右留点白，防止文字贴边 */
+    }
+
+    /* 1. 社交按钮变小、变紧凑 */
+    .social-section {
+        gap: 8px;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    .social-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    /* 2. 海报图片缩小 */
+    .poster-wrapper img {
+        max-height: 30vh;
+    }
+
+    /* 3. 底部版权文字变小 */
+    .footer {
+        font-size: 11px;
+        margin-top: 15px;
+        padding-top: 10px;
     }
 }
