@@ -1,0 +1,22 @@
+/* =========================================
+   首页手机端专属适配（屏幕宽度小于 600px 时生效）
+   ========================================= */
+@media (max-width: 600px) {
+    /* 社交按钮变竖排 */
+    .social-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .social-btn {
+        width: 80%;
+        padding: 12px 0;
+    }
+    /* 标题字号稍微变小 */
+    h1 {
+        font-size: 22px;
+    }
+    .subtitle {
+        font-size: 13px;
+    }
+}
