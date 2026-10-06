@@ -138,9 +138,10 @@
         
         /* 底部版权 */
         .footer {
-            margin-top: auto;
-            font-size: 13px;
-            color: #bdc3c7;
+            margin-top: 10px;    /* 👈 把原来的 auto 改成 10px，把版权往上拉 */
+            padding-top: 15px;   /* 👈 减少上方的留白 */
+            font-size: 11px;     /* 👈 字号从 13px 调小到 11px */
+            color: #bdc3c7;      /* 颜色保持浅灰 */
         }
         .footer strong {
             color: #e74c3c;
@@ -156,7 +157,7 @@
 
         .poster-wrapper img {
             width: 100%;
-            max-height: 30vh; /* 👈 新增：限制最高占屏幕高度的 30%，图片就变小了 */
+            max-height: 40vh; /* 👈 新增：限制最高占屏幕高度的 30%，图片就变小了 */
             object-fit: cover;
             display: block;
         }
@@ -195,7 +196,7 @@
 
         <!-- 微博按钮 -->
         <div class="dropdown">
-            <button class="social-btn wb-btn">微博</button>
+            <button class="social-btn wb-btn">Weibo</button>
             <div class="dropdown-content">
                 <a href="https://weibo.com/u/7977574769" target="_blank">JakrapatrWL</a>
                 <a href="https://weibo.com/u/7978038699" target="_blank">EstSupha</a>
@@ -212,7 +213,7 @@
 
     <!-- 底部版权 -->
     <div class="footer">
-        © 2026 WilliamEst行程 | Designed & Maintained by <strong>TrillPineyew</strong>
+        © 2026 WilliamEst行程 | Contact: <strong>TrillPineyew</strong>
     </div>
     
 </div>
