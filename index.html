@@ -18,22 +18,28 @@
             min-height: 100vh;
             box-sizing: border-box;
             /* overflow: hidden; 👈 先删掉这行，看下是否还有滚动条 */
+            
+            /* 👇 关键改动：改成纵向排列，并让内容撑满 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* 让卡片在中间垂直居中 */
+            align-items: center;     /* 让卡片水平居中 */
+
         }
-        .home-container {
+         .home-container {
             width: 100%;
             max-width: 600px;
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            padding: 25px 25px;
+            padding: 20px 30px;
             text-align: center;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            /* 👇 关键：让它水平居中，且不限制最大宽度 */
+            gap: 10px;
             margin: 0 auto;
-            box-sizing: border-box;
         }
+
         h1 {
             font-size: 28px;
             color: #2c3e50;
@@ -140,12 +146,12 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
-        /* 底部版权 */
+        /* 👇 底部版权：让它自动沉底 */
         .footer {
-            margin-top: 10px;    /* 👈 把原来的 auto 改成 10px，把版权往上拉 */
-            padding-top: 15px;   /* 👈 减少上方的留白 */
-            font-size: 11px;     /* 👈 字号从 13px 调小到 11px */
-            color: #bdc3c7;      /* 颜色保持浅灰 */
+            margin-top: auto;        /* 👈 关键：把 footer 推到页面最底部 */
+            padding-top: 20px;
+            font-size: 12px;
+            color: #bdc3c7;
         }
         .footer strong {
             color: #e74c3c;
@@ -214,13 +220,11 @@
     <div class="poster-wrapper">
         <img src="images/poster1.jpg" alt="WilliamEst 宣传海报" style="width: 100%; height: auto; display: block;">
     </div>
-    
-</div>
-
-<!-- 底部版权 -->
+    <!-- 底部版权 -->
     <div class="footer">
         © 2026 WilliamEst行程 | Contact: <strong>TrillPineyew</strong>
     </div>
-    
+</div>
+
 </body>
 </html>
