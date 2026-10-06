@@ -146,17 +146,18 @@
             color: #e74c3c;
         }
 
-        /* 图片区域 */
-        .video-wrapper {
+       /* 图片区域 */
+        .poster-wrapper {
             margin-top: 20px;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .video-wrapper img {
-            width: 100%;          /* 宽度撑满卡片 */
-            height: auto;         /* 高度按原图比例自适应 */
+        .poster-wrapper img {
+            width: 100%;
+            max-height: 30vh; /* 👈 新增：限制最高占屏幕高度的 30%，图片就变小了 */
+            object-fit: cover;
             display: block;
         }
         
@@ -185,7 +186,7 @@
 
         <!-- X (Twitter) 按钮 -->
         <div class="dropdown">
-            <button class="social-btn x-btn">X (Twitter)</button>
+            <button class="social-btn x-btn">Twitter</button>
             <div class="dropdown-content">
                 <a href="https://x.com/williamjkp1?s=21" target="_blank">Williamjkp1</a>
                 <a href="https://x.com/estrvp?s=21" target="_blank">est_rvp</a>
