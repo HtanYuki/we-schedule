@@ -9,20 +9,15 @@
 <body>
 
 <div class="app-container">
-    
-    <!-- 1. 顶部的返回导航 -->
     <div style="text-align: left; margin-bottom: 20px;">
-        <!-- 点击这里返回总览页(calendar.html) -->
         <a href="calendar.html" style="text-decoration: none; color: #7f8c8d; font-weight: 600; font-size: 15px;">← 返回</a>
     </div>
 
-    <!-- 2. 日历卡片区域 -->
     <div class="calendar-wrapper">
         <div class="calendar-title">WilliamEst 行程日历</div>
         <div class="calendar-month">2026年10月</div>
         
-        <div class="calendar-grid">
-            <!-- 星期表头 -->
+        <div class="calendar-grid" id="calendar-grid">
             <div class="weekday">日</div>
             <div class="weekday">一</div>
             <div class="weekday">二</div>
@@ -30,155 +25,101 @@
             <div class="weekday">四</div>
             <div class="weekday">五</div>
             <div class="weekday">六</div>
-
-            <!-- 1-14日  -->
-            <div class="day-cell">1</div>
-
-            <div style="position: relative;">
-                <input type="checkbox" id="event-2">
-                <label for="event-2" class="day-cell has-event">2</label>
-            </div>
-
-            <div class="day-cell">3</div>
-            <div class="day-cell">4</div>
-            <div class="day-cell">5</div>
-            <div class="day-cell">6</div>
-            <div class="day-cell">7</div>
-
-             <!-- 👇 8日：有行程，点击这个格子 -->
-            <div style="position: relative;">
-                <input type="checkbox" id="event-8">
-                <label for="event-8" class="day-cell has-event">8</label>
-            </div>
-
-            <div class="day-cell">9</div>
-            <div class="day-cell">10</div>
-            <div class="day-cell">11</div>
-            <div class="day-cell">12</div>
-            <div class="day-cell">13</div>
-            <div class="day-cell">14</div>
-
-            <!-- 15-19日 -->
-            <div class="day-cell">15</div>
-            <div class="day-cell">16</div>
-            <div class="day-cell">17</div>
-            <div class="day-cell">18</div>
-            <div class="day-cell">19</div>
-
-            <!-- 👇 20日：有行程，点击这个格子 -->
-            <div style="position: relative;">
-                <input type="checkbox" id="event-20">
-                <label for="event-20" class="day-cell has-event">20</label>
-            </div>
-
-            <!-- 21-31日 -->
-            <div class="day-cell">21</div>
-            <div class="day-cell">22</div>
-            <div class="day-cell">23</div>
-            <div class="day-cell">24</div>
-            <div class="day-cell">25</div>
-            <div class="day-cell">26</div>
-            <div class="day-cell">27</div>
-            <div class="day-cell">28</div>
-            <div class="day-cell">29</div>
-            <div class="day-cell">30</div>
-            <div class="day-cell">31</div>
-
+            <!-- 日历格子会由 JavaScript 自动生成 -->
         </div>
     </div>
 
-    <!-- 3. 行程详情展示区（就在日历下方） -->
-    <div class="event-area">
-        <div class="event-detail" id="detail-2">
-            <h3>2026年10月2日</h3>
-            <div class="event-item">
-               <p><strong>活动：WilliamEst Concert PressTour</strong></p>
-               <p>12:30 ELLE Men</p>
-               <p>14:45 วันบันเทิง Live</p>
-               <p>15:45 Nine Entertain</p>
-               <p>16:45 Praew Magazine Live</p>
-               <p>19:00 GMMTV Live</p>
-            </div>
-
-            <div class="event-item">
-                <p><strong>活动: GMMTV HAPPY Family</strong></p>
-            </div>
-        </div>
-
-        <!-- 15号的行程详情 -->
-        <div class="event-detail" id="detail-8">
-            <h3>2026年10月8日</h3>
-            <p><strong>活动：</strong> GMMTV LIVEHOUSE</p>
-            <p><strong>时间：</strong> 9:00 PM</p>
-            <p><strong>地点：</strong> Union Hall</p>
-            <p><strong>williamest Wesley</strong></p>
-        </div>
-
-        <!-- 20号的行程详情 -->
-        <div class="event-detail" id="detail-20">
-            <h3>2026年10月20日</h3>
-            <p><strong>标题：</strong> 线上直播粉丝见面会</p>
-            <p><strong>时间：</strong> 9:00 PM</p>
-            <p><strong>地点：</strong> 线上 · 某直播平台</p>
-        </div>
+    <!-- 行程详情展示区 -->
+    <div class="event-area" id="event-area">
+        <!-- 详情卡片会由 JavaScript 自动生成 -->
     </div>
 
-    <!-- 4. 底部版权归属 -->
     <div class="footer">
         © 2026 WilliamEst行程 | Contact: <strong>TrillPineyew</strong>
     </div>
-
 </div>
 
-<!-- 5. 交互脚本 -->
+<!-- 引入数据文件 -->
+<script src="../js/data.js"></script>
+
+<!-- 生成日历和行程的脚本 -->
 <script>
-    // 1. 获取所有隐藏的勾选框（对应每个有行程的日期）
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    // 1. 配置当月信息
+    const currentMonth = "oct-2026";  // 对应 data.js 里的键
+    const monthTitle = "2026年10月";
+    const startDay = 4; // 10月1日是周四（周日=0, 周一=1, ..., 周四=4）
+
+    // 2. 获取数据
+    const monthData = scheduleData[currentMonth] || {};
+
+    // 3. 生成日历格子
+    const calendarGrid = document.getElementById('calendar-grid');
     
-    // 2. 给每个勾选框添加点击事件监听
+    // 补全月初的空白格子
+    for (let i = 0; i < startDay; i++) {
+        calendarGrid.innerHTML += `<div class="day-cell" style="visibility: hidden;"></div>`;
+    }
+
+    // 生成 1-31 日
+    for (let day = 1; day <= 31; day++) {
+        const dayStr = day.toString();
+        const hasEvent = monthData[dayStr] && monthData[dayStr].length > 0;
+        
+        if (hasEvent) {
+            calendarGrid.innerHTML += `
+                <div style="position: relative;">
+                    <input type="checkbox" id="event-${day}">
+                    <label for="event-${day}" class="day-cell has-event">${day}</label>
+                </div>
+            `;
+        } else {
+            calendarGrid.innerHTML += `<div class="day-cell">${day}</div>`;
+        }
+    }
+
+    // 4. 生成行程详情区
+    const eventArea = document.getElementById('event-area');
+    for (const day in monthData) {
+        const events = monthData[day];
+        let eventHtml = `<div class="event-detail" id="detail-${day}">
+            <h3>${monthTitle.replace('月', '月')}${day}日</h3>`;
+        
+        events.forEach(ev => {
+            eventHtml += `<div class="event-item">`;
+            if (ev.title) eventHtml += `<p><strong>${ev.title}</strong></p>`;
+            if (ev.time) eventHtml += `<p>${ev.time}</p>`;
+            eventHtml += `</div>`;
+        });
+
+        eventHtml += `</div>`;
+        eventArea.innerHTML += eventHtml;
+    }
+
+    // 5. 交互逻辑（点击日期，显示对应详情，并取消其他选中）
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(box => {
         box.addEventListener('change', function() {
-            
-            // ⭐ 第一步：先记住当前点击的是谁（在清空之前，把它的 ID 存下来）
             const clickedId = this.id;
             const isChecked = this.checked;
 
-            // --- 第二步：清除所有日期的“选中”状态 ---
-            // 1. 移除所有 label 的红色高亮
             document.querySelectorAll('label.day-cell').forEach(label => {
                 label.classList.remove('active');
             });
-
-            // 2. 清空所有勾选框的状态（注意，这里会把当前的也清掉）
-            checkboxes.forEach(cb => {
-                cb.checked = false;
-            });
-
-            // --- 第三步：隐藏所有行程详情框 ---
+            checkboxes.forEach(cb => { cb.checked = false; });
             document.querySelectorAll('.event-detail').forEach(detail => {
                 detail.style.display = 'none';
             });
 
-            // --- 第四步：如果当前点击的是“选中”操作，重新点亮它 ---
             if (isChecked) {
-                // 1. 重新把当前这个勾选框设置为选中
                 const currentBox = document.getElementById(clickedId);
-                if (currentBox) {
-                    currentBox.checked = true;
-                }
+                if (currentBox) currentBox.checked = true;
 
-                // 2. 让当前点击的这个日期格子变红
                 const currentLabel = document.querySelector(`label[for="${clickedId}"]`);
-                if (currentLabel) {
-                    currentLabel.classList.add('active');
-                }
+                if (currentLabel) currentLabel.classList.add('active');
 
-                // 3. 显示对应的行程详情
                 const detailId = 'detail-' + clickedId.split('-')[1];
                 const targetDetail = document.getElementById(detailId);
-                if (targetDetail) {
-                    targetDetail.style.display = 'block';
-                }
+                if (targetDetail) targetDetail.style.display = 'block';
             }
         });
     });
