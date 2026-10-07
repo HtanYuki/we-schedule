@@ -36,7 +36,7 @@ const scheduleData = {
                 items: [
                     { time: "20:00", title: "TikTok: Labx Skin" }
                 ]
-            }
+            },
             {
                 title: "GMMTV LIVEHOUSE",
                 items: [
